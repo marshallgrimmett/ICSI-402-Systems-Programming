@@ -1,12 +1,18 @@
+.SUFFIXES: .c .o
+
 CC = gcc
 CFLAGS = -g
 OBJECTS = main.o file1.o
 
-prog: $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o sample.o
+.c.o:
+	$(CC) $(CFLAGS) -c $<
 
-main: main.o
-	$(CC) $(CFLAGS) main.c -o sample.o
+sample: $(OBJECTS)
+	$(CC) $(OBJECTS) -o sample
 
-file1: file1.o
-	$(CC) $(CFLAGS) file1.c -o sample.o
+main.o: globals.h
+
+funct.o: externs.h
+
+clean:
+	rm -f *.o core
