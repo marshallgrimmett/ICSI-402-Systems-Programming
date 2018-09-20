@@ -36,7 +36,7 @@ int addEmployees() {
       break;
     }
     printf("Enter name:");
-    scanf("%s", &temp.name);
+    scanf("%s", temp.name);
     printf("Enter salary:");
     scanf("%f", &temp.salary);
     fwrite((const void*) &temp, sizeof(struct Employee), 1, fp);
