@@ -2,7 +2,7 @@
 
 CC = gcc
 CFLAGS = -g
-OBJECTS = main.o file1.o
+OBJECTS = main.o functions.o
 
 .c.o:
 	$(CC) $(CFLAGS) -c $<
@@ -10,9 +10,9 @@ OBJECTS = main.o file1.o
 sample: $(OBJECTS)
 	$(CC) $(OBJECTS) -o sample
 
-main.o: globals.h
+main.o:
 
-file1.o: externs.h
+functions.o:
 
 clean:
 	rm -f *.o core

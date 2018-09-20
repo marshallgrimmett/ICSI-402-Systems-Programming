@@ -1,31 +1,57 @@
-#include "externs.h"
+#include <string.h>
 
-char* getName(int i) {
-  return employees[i].name;
+struct Employee {
+  char name[20];
+  int id;
+};
+
+struct Employee employees[50];
+
+// int getLength() {
+//   return (sizeof(employees) / sizeof(struct Employee));
+// }
+
+// void addEmployee(char name[], int id) {
+//   int employeesLen = getLength();
+//   if (employeesLen < 50) {
+//     strcpy(employees[employeesLen].name, name);
+//   }
+//   else {
+//     printf("Database Full :( \n");
+//   }
+// }
+
+char* getName(int index) {
+  return employees[index].name;
 }
 
-void setName(int i, char name[]) {
-  strcpy(employees[i].name, name);
+void setName(int index, char name[]) {
+  strcpy(employees[index].name, name);
 }
 
-int getId(int i) {
-  return employees[i].id;
+int getId(int index) {
+  return employees[index].id;
 }
 
-void setId(int i, char id[]) {
-  employees[i].id = id;
+void setId(int index, int id) {
+  employees[index].id = id;
 }
 
-int compare(int id1, int id2) {
-  if (id1 == id2) {
+int compare(int index1, int index2) {
+  if (employees[index1].id == employees[index2].id) {
     return 1;
   }
   return 0;
 }
 
-void print() {
-  int employeeLen = sizeof(employees) / sizeof(struct employee);
-  for (int i = 0; i < employeeLen; i++) {
-    printf("%s\n", employees[i]);
-  }
+void print(int index) {
+  printf("Name: %s\n", employees[index].name);
+  printf("ID: %d\n", employees[index].id);
 }
+
+// void iterateAll() {
+//   int employeesLen = getLength();
+//   for (int i = 0; i < employeesLen; i++) {
+//     printf("%s\n", employees[i]);
+//   }
+// }
