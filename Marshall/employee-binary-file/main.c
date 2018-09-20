@@ -2,12 +2,12 @@
 
 int main() {
   void initDatabase();
-  int addEmployees();
+  void addEmployees();
   void printEmployees();
 
   initDatabase();
-  int numEmployees = addEmployees(); 
-  printEmployees(numEmployees);
+  addEmployees(); 
+  printEmployees();
 
   return 0;
 }

@@ -7,6 +7,7 @@ struct Employee {
 } temp;
 
 const int size = 100;
+int numEmployees = 0;
 
 //*****************************************************************************
 void initDatabase() {
@@ -24,11 +25,12 @@ void initDatabase() {
 }
 
 //*****************************************************************************
-int addEmployees() {
+void addEmployees() {
   FILE *fp = fopen("emp_db.bin", "r+");
-  int i;
 
-  for (i = 0; i < size; i++) {
+  fseek(fp, (numEmployees * sizeof(struct Employee)), SEEK_SET); // move to last record
+
+  for (numEmployees = numEmployees; numEmployees < size; numEmployees++) {
     printf("\nNew Employee (type -1 to exit) ******************\n");
     printf("Enter id:");
     scanf("%d", &temp.empid);
@@ -43,15 +45,13 @@ int addEmployees() {
     fseek(fp, sizeof(struct Employee), SEEK_CUR); // move to next record
   }
 
-  printf("\n\n# of employees: %d\n\n", i);
+  printf("\n\n# of employees: %d\n\n", numEmployees);
 
   fclose(fp);
-
-  return i;
 }
 
 //*****************************************************************************
-void printEmployees(int numEmployees) {
+void printEmployees() {
   FILE *fp = fopen("emp_db.bin", "r");
 
   for (int i = 0; i < numEmployees; i++) {
