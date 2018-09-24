@@ -19,8 +19,6 @@ void initDatabase() {
     fwrite((const void*) &temp, sizeof(struct Employee), 1, fp);
   }
 
-  // fwrite((const void*) &temp, sizeof(struct Employee), 100, fp);
-
   fclose(fp);
 }
 
@@ -62,6 +60,24 @@ void printEmployees() {
     printf("salary: %f\n", temp.salary);
     fseek(fp, sizeof(struct Employee), SEEK_CUR);
   }
+
+  fclose(fp);
+}
+
+//*****************************************************************************
+void printEmployees2() {
+  FILE *fp = fopen("emp_db.bin", "r");
+  int i = 0;
+
+  do {
+    fread(&temp, sizeof(struct Employee), 1, fp);
+    printf("\nEmployee %d ******************\n", i + 1);
+    printf("id: %d\n", temp.empid);
+    printf("name: %s\n", temp.name);
+    printf("salary: %f\n", temp.salary);
+    fseek(fp, sizeof(struct Employee), SEEK_CUR);
+    i++;
+  } while(temp.empid != -1);
 
   fclose(fp);
 }
