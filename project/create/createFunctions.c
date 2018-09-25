@@ -11,11 +11,11 @@ void create(int argc, char *argv[]) {
   if (argc == (NUM_FD_ARGS + 1)) {
     if (strcmp(argv[1], "-f") == 0) {
       // create file
-      // TODO
+      // TODO - try open()
     }
     else if (strcmp(argv[1], "-d") == 0) {
       // create directory
-      // TODO
+      // TODO - try mkdir(), though it might not be allowed
     }
     else {
       printf("invalid command.\n");
