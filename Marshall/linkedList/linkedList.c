@@ -13,7 +13,6 @@ link_t* create_link(char* key, int value);
 
 int main() {
   link_t* head = create_link("this is a key", 5);
-
   head->next = create_link("something", 2);
 
   // print linked list

@@ -1,12 +1,18 @@
 #include <string.h>
 #include <stdio.h>
-#include <unistd.h> // link, symlink, syscall
-#include <sys/stat.h> // mkdir
-#include <fcntl.h> // open
-#include <sys/syscall.h> // syscall macros
+// #include <unistd.h> // link, symlink, syscall
+// #include <sys/stat.h> // mkdir
+// #include <fcntl.h> // open
+// #include <sys/syscall.h> // syscall macros
+// #include <errno.h>
 
 #define NUM_FD_ARGS 2
 #define NUM_HS_ARGS 3
+
+void createFile(char *newFile);
+void createDir(char *newDir);
+void createLink(char *oldFile, char *newFile);
+void createSymLink(char *oldFile, char *newFile);
 
 void create(int argc, char *argv[]) {
   if (argc == (NUM_FD_ARGS + 1)) {
@@ -16,7 +22,7 @@ void create(int argc, char *argv[]) {
     }
     else if (strcmp(argv[1], "-d") == 0) {
       // create directory
-      mkdir(argv[2], 0750); // I'm pretty sure this is not allowed
+      createDir(argv[2]);
     }
     else {
       printf("invalid command.\n");
@@ -38,22 +44,4 @@ void create(int argc, char *argv[]) {
   else {
     printf("invalid number of arguments.\n");
   }
-}
-
-void createFile(char *filename) {
-  int file;
-  if ((file = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0640)) == NULL) {
-    close(file);
-  }
-  else {
-    printf("error creating file.");
-  }
-}
-
-void createLink() {
-
-}
-
-void createSymLink() {
-  
 }
