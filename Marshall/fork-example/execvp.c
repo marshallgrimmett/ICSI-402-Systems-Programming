@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
 
 int main() {
   pid_t child = fork();
@@ -9,8 +7,7 @@ int main() {
     return 0;
   }
   else {
-    execlp("grep", "grep", "test", "infile.txt", NULL);
+    execvp("ls", "ls", "-l", "infile.txt", NULL);
     perror("failed.");
   }
-  return 0;
 }
