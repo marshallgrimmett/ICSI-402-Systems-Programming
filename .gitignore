@@ -50,11 +50,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
-# Misc
-project/create
-project/fileConverter
-project/indexer
-project/srchindx
-project/naiveInterface
-project/flightdata
