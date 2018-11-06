@@ -49,22 +49,24 @@ void indexer(char *indexFileName, char *dir) {
 
   // Change to directory containing files. Try chdir()
 
-  // open files sequentially until no files remain. Try readdir().
-  // This will be inside the algorithm below.
-
+  // PART 1
   // possible algorithm:
-  // for each record in each file (2 for loops)
-  //    search 2d list for the Airport, then for the Record
-  //    if the Airport does not exist, createAirport(airportCode) and createRecord(fileName, 1)
-  //    if the Airport exists, but Record does not, createRecord(fileName, 1)
-  //    if both exist, increment the Record count
+  // for each file. Try readdir(). (loop 1)
+  //    open file
+  //    for each record in each file (loop 2)
+  //      get origin airport and destination airport
+  //      search 2d list for the Airport, then for the Record
+  //      if the Airport does not exist, createAirport(airportCode) and createRecord(fileName, 1)
+  //      if the Airport exists, but Record does not, createRecord(fileName, 1)
+  //      if both exist, increment the Record count
+  //    close file
   // missing anything?
 
-  // Make sure to close each file after opening
+  // PART 2
+  // Sort the Airport codes in descending order. Maybe do this in the above algorithm?
+  // Sort the Records by count
 
-  // Sort the Airport codes in descending order
-  // The Records should be sorted already based on how the fileConverter works. May need to sort anyways.
-
+  // PART 3
   // Parse the 2d list into a file with the format:
   // <list> term
   // name1 count1 name2 count2 name3 count3 name4 count4 name5 count5
