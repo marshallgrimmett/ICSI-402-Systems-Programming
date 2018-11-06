@@ -42,8 +42,9 @@ void fileConverter(char *fileName, char *newDir) {
 
   // allocate memory for flights array
   flights = (char **) malloc(numRecords * sizeof(char*));
-  for (int j = 0; j < numRecords; j++) {
-    flights[j] = (char *) malloc(SIZE_OF_RECORD * sizeof(char*));
+  int i;
+  for (i = 0; i < numRecords; i++) {
+    flights[i] = (char *) malloc(SIZE_OF_RECORD * sizeof(char*));
   }
 
   // get records into array (numRecords is exact number of records)
@@ -66,7 +67,8 @@ void fileConverter(char *fileName, char *newDir) {
   printToFiles(flights, numRecords);
   
   // free each record from memory
-  for (int j = 0; j < numRecords; j++) {
+  int j;
+  for (j = 0; j < numRecords; j++) {
     free(flights[j]);
   }
   free(flights);
@@ -103,7 +105,8 @@ int getRecords(FILE *fp, char **flights) {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void printFlights(char **flights, int numRecords) {
-  for (int j = 0; j < numRecords; j++) {
+  int j;
+  for (j = 0; j < numRecords; j++) {
     printf("%s\n", flights[j]);
   }
 }
@@ -127,7 +130,8 @@ void printToFiles(char **flights, int numRecords) {
   const char *ext = ".txt";
 
   // put each record into a text file corresponding to the Airline
-  for (int i = 0; i < numRecords; i++) {
+  int i;
+  for (i = 0; i < numRecords; i++) {
     strcpy(airline, getAirline(flights[i]));
     strcat(airline, ext);
     fd = createFile(airline);
@@ -143,7 +147,8 @@ void printToFiles(char **flights, int numRecords) {
 // gets the airline code from the record specified
 char *getAirline(char *record) {
   char *airline = malloc(sizeof(char) * MAX_AIRLINE_CODE);
-  for(int i = 0; i <= MAX_AIRLINE_CODE; i++) {
+  int i;
+  for(i = 0; i <= MAX_AIRLINE_CODE; i++) {
     if (isalpha((int) record[i]) == 0) {
       break;
     }
@@ -203,27 +208,33 @@ void getDateStr(char *date, char *str) {
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void swapFlights(char *f1, char *f2) {
-  char *temp;
-  strcpy(temp, f1);
-  strcpy(f1, f2);
-  strcpy(f2, temp);
-}
+// void swapFlights(char *f1, char *f2) {
+//   char *temp;
+//   strcpy(temp, f1);
+//   strcpy(f1, f2);
+//   strcpy(f2, temp);
+// }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sorts an array of flights by date
 void bubbleSort(char **arr, const int n) {
-  char *date1 = malloc(sizeof(char) * MIN_RECORD_LEN);
-  char *date2 = malloc(sizeof(char) * MIN_RECORD_LEN);
-  for (int i = 0; i < n-1; i++){  
-    for (int j = 0; j < n-i-1; j++)  {
+  // char *date1 = (char *) malloc(sizeof(char) * MIN_RECORD_LEN);
+  // char *date2 = (char *) malloc(sizeof(char) * MIN_RECORD_LEN);
+  char date1[MIN_RECORD_LEN], date2[MIN_RECORD_LEN];
+  char temp[SIZE_OF_RECORD];
+  int i, j;
+  for (i = 0; i < n-1; i++){  
+    for (j = 0; j < n-i-1; j++)  {
       getDateStr(date1, arr[j]);
       getDateStr(date2, arr[j+1]);
       if (compareDates(strToDate(date1), strToDate(date2)) > 0) {
-        swapFlights(arr[j], arr[j+1]);
+        // swapFlights(arr[j], arr[j+1]);
+        strcpy(temp, arr[j]);
+        strcpy(arr[j], arr[j+1]);
+        strcpy(arr[j+1], temp);
       }
     } 
   }
-  free(date1);
-  free(date2);
+  // free(date1);
+  // free(date2);
 }
