@@ -1,0 +1,7 @@
+./create -f test.txt
+./create -d test
+./create -h test.txt test2.txt
+./create -s test.txt test3.txt
+rm test.txt
+rm test2.txt
+rm test3.txt
