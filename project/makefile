@@ -6,7 +6,7 @@ NAIVE_INTERFACE_OBJECTS = naiveInterface.o naiveInterfaceFunctions.o
 CREATE_OBJECTS = create.o createFunctions.o
 FILE_CONVERTER_OBJECTS = fileConverter.o fileConverterFunctions.o createFunctions.o
 INDEXER_OBJECTS = indexer.o indexerFunctions.o
-SRCH_INDX_OBJECTS = srchindx.o srchindxFunctions.o
+SRCH_INDX_OBJECTS = srchindx.o srchindxFunctions.o hashtable.o hashFunction.o
 
 .c.o:
 	$(CC) $(CFLAGS) -c $<
@@ -29,4 +29,4 @@ srchindx: $(SRCH_INDX_OBJECTS)
 	$(CC) $(SRCH_INDX_OBJECTS) -o srchindx
 
 clean:
-	rm -f *.o core
+	rm -f *.o core create fileConverter indexer srchindx naiveInterface
