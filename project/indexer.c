@@ -8,6 +8,8 @@ int main(int argc, char *argv[]) {
     printf("Invalid number of arguments.");
     return -1;
   }
-  indexer("indx.txt", "flightdata");
+  // // check for missing index file name
+  // indexer(argv[1], argv[2]);
+  // indexer("indx.txt", "flightdata");
   return 0;
 }
